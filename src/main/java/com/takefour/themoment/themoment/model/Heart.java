@@ -9,9 +9,9 @@ import javax.persistence.Id;
 @Entity
 @Data
 public class Heart {
-    @Id
-    @GeneratedValue
-    private Integer id;
-    private Integer userId;
-    private Integer momentId;
+	@Id
+	@GeneratedValue
+	private Integer id;
+	private Integer userId;
+	private Integer momentId;
 }
