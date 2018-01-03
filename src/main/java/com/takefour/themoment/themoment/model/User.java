@@ -11,17 +11,17 @@ import javax.persistence.Id;
 @Entity
 @Data
 public class User {
-    @Id // primary key
-    @GeneratedValue //auto increment
-    private Integer id;
+	@Id // primary key
+	@GeneratedValue //auto increment
+	private Integer id;
 
-    @Column(nullable = false)
-    private String email;
+	@Column(nullable = false)
+	private String email;
 
-    @Column(nullable = false)
-    private String password;
+	@Column(nullable = false)
+	private String password;
 
-    private String userName;
+	private String userName;
 
-    //cmd+n getter and setter
+	//cmd+n getter and setter
 }
