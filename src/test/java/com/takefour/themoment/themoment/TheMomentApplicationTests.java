@@ -2,6 +2,7 @@ package com.takefour.themoment.themoment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.Test;
@@ -50,7 +51,15 @@ public class TheMomentApplicationTests {
 	@Test
 	public void momentTest() {
 		Moment moment = new Moment();
-		moment.setId(1);
+		moment.setCreateDate(LocalDateTime.now());
+		moment.setDescription("테스트");
+		moment.setCityId("");
+		moment.setPlaceId("");
+
 		entityManager.persist(moment);
+
+		Moment one = momentRepository.findAll().get(0);
+		assertThat(one.getDescription())
+				.isEqualTo("테스트");
 	}
 }
