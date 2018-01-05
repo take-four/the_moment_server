@@ -46,6 +46,7 @@ public class MomentController {
 
 		moments.add(moment);
 		moments.add(moment);
+		moments.add(moment);
 
 		return moments;
 	}
