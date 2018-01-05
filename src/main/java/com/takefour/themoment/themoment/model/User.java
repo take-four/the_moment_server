@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //실행될때 이걸보고 테이블을 만들어준다.
 @Entity
 @Data
@@ -18,6 +20,7 @@ public class User {
 	@Column(nullable = false)
 	private String email;
 
+	@JsonIgnore
 	@Column(nullable = false)
 	private String password;
 
