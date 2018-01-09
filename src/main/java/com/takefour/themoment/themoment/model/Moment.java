@@ -27,6 +27,7 @@ public class Moment {
 	private String placeId;
 
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 
 }
