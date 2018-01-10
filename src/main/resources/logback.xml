@@ -1,0 +1,23 @@
+<!--LOCAL -->
+<configuration scan="true" scanPeriod="30 seconds">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%20.20t] %-40.40logger{39} %5L: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.apache.coyote.http11" additivity="false">
+        <level value="TRACE" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="org.springframework.security.web" additivity="false">
+        <level value="TRACE" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
