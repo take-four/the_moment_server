@@ -1,13 +1,18 @@
 package com.takefour.themoment.themoment.model;
 
-import lombok.Data;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Data;
 
 //실행될때 이걸보고 테이블을 만들어준다.
 @Entity
@@ -29,5 +34,6 @@ public class User {
 	@ElementCollection
 	@CollectionTable(name = "visited")
 	private List<Integer> cityId = new ArrayList<>();
-	//cmd+n getter and setter
+
+	private String role;
 }

@@ -84,3 +84,5 @@ buildNumber.properties
 # End of https://www.gitignore.io/api/java,maven,intellij
 
 build/
+
+the-moment-379d9-firebase-adminsdk-4zjhj-9f656d5a3c.json
