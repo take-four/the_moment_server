@@ -1,12 +1,16 @@
 package com.takefour.themoment.themoment.config;
 
+import java.util.List;
+
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.takefour.themoment.themoment.config.method.support.UserHandlerMethodArgumentResolver;
 import com.takefour.themoment.themoment.security.FirebaseAuthInterceptor;
 
 @Configuration
@@ -45,5 +49,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(firebaseAuthInterceptor())
 				.addPathPatterns("/**");
+	}
+
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(userHandlerMethodArgumentResolver());
+		super.addArgumentResolvers(argumentResolvers);
+	}
+
+	@Bean
+	public UserHandlerMethodArgumentResolver userHandlerMethodArgumentResolver() {
+		return new UserHandlerMethodArgumentResolver();
 	}
 }
