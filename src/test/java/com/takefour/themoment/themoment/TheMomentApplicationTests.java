@@ -36,7 +36,7 @@ public class TheMomentApplicationTests {
 	public void userTest() {
 		User user = new User();
 		user.setEmail("byeol3058@gmail.com");
-		user.setUserName("hanbyeol");
+		user.setName("hanbyeol");
 		user.setPassword("themoment");
 
 		entityManager.persist(user);
@@ -53,7 +53,7 @@ public class TheMomentApplicationTests {
 		Moment moment = new Moment();
 		moment.setCreateDate(LocalDateTime.now());
 		moment.setDescription("테스트");
-		moment.setCityId("");
+//		moment.setCityId("");
 		moment.setPlaceId("");
 
 		entityManager.persist(moment);

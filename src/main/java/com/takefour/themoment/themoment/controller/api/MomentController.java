@@ -35,7 +35,7 @@ public class MomentController {
 		Moment moment = new Moment();
 		moment.setId(1);
 		moment.setDescription("test1");
-		moment.setCityId("city");
+//		moment.setCityId("city");
 		moment.setPlaceId("place");
 		moment.setCreateDate(LocalDateTime.now());
 
@@ -56,7 +56,7 @@ public class MomentController {
 		Moment moment = new Moment();
 		moment.setId(1);
 		moment.setDescription("test1");
-		moment.setCityId("city");
+//		moment.setCityId("city");
 		moment.setPlaceId("place");
 		moment.setCreateDate(LocalDateTime.now());
 

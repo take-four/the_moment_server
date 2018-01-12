@@ -39,7 +39,7 @@ public class UserService {
 	//해당 아이디로 조회해와서 파라미터의 유저객체와 기존 디비의 값을 비교해서 바꾼다
 	public User update(Integer id, User user){
 		User updated = userRepository.findOne(id);
-		updated.setUserName(user.getUserName());
+		updated.setName(user.getName());
 		updated.setPassword(user.getPassword());
 		return updated;
 	}
