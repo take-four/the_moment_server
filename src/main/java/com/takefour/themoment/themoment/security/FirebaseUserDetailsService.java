@@ -24,6 +24,6 @@ public class FirebaseUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			return null;
 		}
-		return new FirebaseUserDetails(user);
+		return user;
 	}
 }
