@@ -8,8 +8,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.takefour.themoment.themoment.security.FirebaseAuthenticationProvider;
@@ -36,17 +38,50 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring()
+				.antMatchers(
+						"/**/*.jpg",
+						"/**/*.jpeg",
+						"/**/*.png",
+						"/**/*.js",
+						"/**/*.css",
+						"/**/*.gif",
+						"/**/*.ttf",
+						"/**/*.wof",
+						"/**/*.woff",
+						"/**/*.woff2",
+						"/v2/api-docs",
+						"/configuration/ui",
+						"/swagger-resources/**",
+						"/configuration/security",
+						"/swagger-ui.html",
+						"/webjars/**",
+						"/v2/swagger.json");
+	}
+
+	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return new ProviderManager(Collections.singletonList(firebaseAuthenticationProvider));
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO: 2018. 1. 14. Have to refactoring 
-		http.addFilterBefore(tokenAuthorizationFilter(), BasicAuthenticationFilter.class).authorizeRequests()//
-				.antMatchers("/**").hasAnyRole("ROLE_ANONYMOUS")
-				.and().csrf().disable()
-				.anonymous().authorities("ROLE_ANONYMOUS");
+		http.csrf().disable();
+		http.authorizeRequests()
+				.antMatchers("/").permitAll()
+				.anyRequest()
+				.fullyAuthenticated()
+				.and()
+				.headers().disable()
+				.csrf().disable();
+		// enable pre auth filter
+		http.addFilterAt(tokenAuthorizationFilter(), AbstractPreAuthenticatedProcessingFilter.class);
+//		// TODO: 2018. 1. 14. Have to refactoring
+//		http.addFilterBefore(tokenAuthorizationFilter(), BasicAuthenticationFilter.class).authorizeRequests()//
+//				.antMatchers("/**").hasAnyRole("ROLE_ANONYMOUS")
+//				.and().csrf().disable()
+//				.anonymous().authorities("ROLE_ANONYMOUS");
 	}
 
 	private FirebaseFilter tokenAuthorizationFilter() {
