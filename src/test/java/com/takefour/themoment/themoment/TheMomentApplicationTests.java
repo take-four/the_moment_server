@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.takefour.themoment.themoment.model.City;
+import com.takefour.themoment.themoment.model.Place;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class TheMomentApplicationTests {
 	public void userTest() {
 		User user = new User();
 		user.setEmail("byeol3058@gmail.com");
-		user.setUserName("hanbyeol");
+		user.setName("hanbyeol");
 		user.setPassword("themoment");
 
 		entityManager.persist(user);
@@ -53,9 +55,16 @@ public class TheMomentApplicationTests {
 		Moment moment = new Moment();
 		moment.setCreateDate(LocalDateTime.now());
 		moment.setDescription("테스트");
-		moment.setCityId("");
-		moment.setPlaceId("");
 
+		City city = new City();
+		entityManager.persist(city);
+
+		Place place = new Place();
+		place.setCityId(0);
+		entityManager.persist(place);
+
+		moment.setCity(city);
+		moment.setPlace(place);
 		entityManager.persist(moment);
 
 		Moment one = momentRepository.findAll().get(0);
