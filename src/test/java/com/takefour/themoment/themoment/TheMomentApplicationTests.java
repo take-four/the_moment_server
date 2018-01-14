@@ -1,12 +1,10 @@
 package com.takefour.themoment.themoment;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.takefour.themoment.themoment.model.City;
-import com.takefour.themoment.themoment.model.Place;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.takefour.themoment.themoment.model.City;
 import com.takefour.themoment.themoment.model.Moment;
+import com.takefour.themoment.themoment.model.Place;
 import com.takefour.themoment.themoment.model.User;
 import com.takefour.themoment.themoment.repository.MomentRepository;
 import com.takefour.themoment.themoment.repository.UserRepository;
@@ -39,7 +39,6 @@ public class TheMomentApplicationTests {
 		User user = new User();
 		user.setEmail("byeol3058@gmail.com");
 		user.setName("hanbyeol");
-		user.setPassword("themoment");
 
 		entityManager.persist(user);
 

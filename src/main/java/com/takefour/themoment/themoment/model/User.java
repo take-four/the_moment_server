@@ -15,8 +15,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 //실행될때 이걸보고 테이블을 만들어준다.
@@ -29,10 +27,6 @@ public class User implements UserDetails {
 
 	@Column(nullable = false)
 	private String email;
-
-	@JsonIgnore
-	@Column(nullable = false)
-	private String password;
 
 	private String name;
 
@@ -49,7 +43,7 @@ public class User implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return password;
+		return null;
 	}
 
 	// getUserName 이랑 구분되어야 함

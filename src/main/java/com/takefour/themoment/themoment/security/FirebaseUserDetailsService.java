@@ -26,4 +26,11 @@ public class FirebaseUserDetailsService implements UserDetailsService {
 		}
 		return user;
 	}
+
+	public UserDetails save(String email, String name) {
+		User user = new User();
+		user.setEmail(email);
+		user.setName(name);
+		return userRepository.save(user);
+	}
 }

@@ -21,11 +21,12 @@ public class FirebaseConfig {
 	@Value("${firebase.config.path}")
 	private String configPath;
 
-	@Value("${firebase.database.url")
+	@Value("${firebase.database.url}")
 	private String databaseUrl;
 
 	@PostConstruct
 	public void init() throws IOException {
+
 		FileInputStream serviceAccount = new FileInputStream(configPath);
 
 		FirebaseOptions options = new FirebaseOptions.Builder()

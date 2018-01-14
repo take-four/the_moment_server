@@ -6,12 +6,10 @@ import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.takefour.themoment.themoment.config.method.support.UserHandlerMethodArgumentResolver;
-import com.takefour.themoment.themoment.security.FirebaseAuthInterceptor;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -29,7 +27,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 			"/**/*.eot",
 			"/**/*.woff",
 			"/**/*.map"};
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		Integer cachePeriod = this.resourceProperties.getCachePeriod();
@@ -38,17 +36,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 				.setCachePeriod(cachePeriod);
 		registry.addResourceHandler("swagger-ui.html")
 				.addResourceLocations("classpath:/META-INF/resources/");
-	}
-
-	@Bean
-	public FirebaseAuthInterceptor firebaseAuthInterceptor() {
-		return new FirebaseAuthInterceptor();
-	}
-
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(firebaseAuthInterceptor())
-				.addPathPatterns("/**");
 	}
 
 	@Override
