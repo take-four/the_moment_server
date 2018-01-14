@@ -17,11 +17,10 @@ public class Place {
 	@GeneratedValue
 	private Integer id;
 
-//	@ColumnDefault()
 	private String name;
 
 	@Column(nullable = false)
-	private String cityId;
+	private Integer cityId;
 
 
 }

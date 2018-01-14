@@ -21,11 +21,12 @@ public class Moment {
 	private LocalDateTime createDate;
 
 	@ManyToOne
-	@JoinColumn(name = "city_id")
+	@JoinColumn(name = "city_id", nullable = false)
 	private City city;
 
-	@Column(nullable = false)
-	private String placeId;
+	@ManyToOne
+	@JoinColumn(name = "place_id", nullable = false)
+	private Place place;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.takefour.themoment.themoment.model.City;
+import com.takefour.themoment.themoment.model.Place;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -35,8 +37,10 @@ public class MomentController {
 		Moment moment = new Moment();
 		moment.setId(1);
 		moment.setDescription("test1");
-//		moment.setCityId("city");
-		moment.setPlaceId("place");
+		City city = new City();
+		moment.setCity(city);
+		Place place = new Place();
+		moment.setPlace(place);
 		moment.setCreateDate(LocalDateTime.now());
 
 
@@ -56,8 +60,10 @@ public class MomentController {
 		Moment moment = new Moment();
 		moment.setId(1);
 		moment.setDescription("test1");
-//		moment.setCityId("city");
-		moment.setPlaceId("place");
+		City city = new City();
+		moment.setCity(city);
+		Place place = new Place();
+		moment.setPlace(place);
 		moment.setCreateDate(LocalDateTime.now());
 
 
