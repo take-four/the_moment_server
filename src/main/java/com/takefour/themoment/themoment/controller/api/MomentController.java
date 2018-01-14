@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.takefour.themoment.themoment.model.City;
 import com.takefour.themoment.themoment.model.Place;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,10 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.takefour.themoment.themoment.config.method.annotation.CurrentUser;
 import com.takefour.themoment.themoment.model.Moment;
 import com.takefour.themoment.themoment.model.User;
+import com.takefour.themoment.themoment.service.GooglePlaceService;
+import com.takefour.themoment.themoment.service.response.GooglePlaceResponse;
 
 @RestController
 @RequestMapping("/apis/moments")
 public class MomentController {
+
+	@Autowired
+	private GooglePlaceService googlePlaceService;
+
 	// TODO: 2018. 1. 5. mock 데이터 내려주기 
 
 	@PostMapping
@@ -83,4 +91,8 @@ public class MomentController {
 		return moment;
 	}
 
+	@GetMapping("/test")
+	public GooglePlaceResponse test() {
+		return googlePlaceService.requestNearBySearch("51.5054597,-0.0775452", "london point of interest", "distance");
+	}
 }
