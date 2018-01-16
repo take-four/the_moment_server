@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.takefour.themoment.themoment.config.method.annotation.CurrentUser;
 import com.takefour.themoment.themoment.model.Moment;
 import com.takefour.themoment.themoment.model.User;
 
@@ -24,7 +25,7 @@ public class MomentController {
 	// TODO: 2018. 1. 5. mock 데이터 내려주기 
 
 	@PostMapping
-	public Moment saveMoment(@RequestBody Moment moment) {
+	public Moment saveMoment(@RequestBody Moment moment, @CurrentUser User user) {
 		return new Moment();
 	}
 

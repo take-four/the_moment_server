@@ -27,10 +27,6 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 
-	public User findByEmailAndPassword(String email, String password) {
-		return userRepository.findByEmailAndPassword(email, password);
-	}
-
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
@@ -40,7 +36,6 @@ public class UserService {
 	public User update(Integer id, User user){
 		User updated = userRepository.findOne(id);
 		updated.setName(user.getName());
-		updated.setPassword(user.getPassword());
 		return updated;
 	}
 
