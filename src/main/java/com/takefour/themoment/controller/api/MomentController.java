@@ -44,10 +44,9 @@ public class MomentController {
 	private PlaceService placeService;
 
 	@GetMapping("/places")
-	public CityPlaceDto getNearbyPlaces(
-	                                   @RequestParam Double latitude,
-	                                   @RequestParam Double longitude,
-	                                   @CurrentUser User user) {
+	public CityPlaceDto getNearbyPlaces(@RequestParam Double latitude,
+	                                    @RequestParam Double longitude,
+	                                    @CurrentUser User user) {
 		String location = latitude + "," + longitude;
 		String city = googlePlaceService.requestGeocode(location, "locality", "en");
 		List<String> places = googlePlaceService.requestNearBySearch(location, city.split(",")[0] + " point of interest", "distance");
@@ -63,10 +62,12 @@ public class MomentController {
 		return momentService.save(moment, cityName, placeName, user.getUsername());
 	}
 
+
 	@GetMapping
 	public List<Moment> getAllMoments(@RequestParam(required = false) String accountId,
 									  @RequestParam(required = false) Double latitude,
 									  @RequestParam(required = false) Double longitude) {
+
 		List<Moment> moments = new ArrayList<>();
 
 		Moment moment = new Moment();
@@ -90,6 +91,31 @@ public class MomentController {
 		return moments;
 	}
 
+	@GetMapping("/city")
+	public List<Moment> getNearbyMoment(@RequestParam Double latitude,
+	                                    @RequestParam Double longitude){
+
+		String location = latitude + "," + longitude;
+		String cityName = googlePlaceService.requestGeocode(location, "locality", "en");
+		List<String> places = googlePlaceService.requestNearBySearch(location, cityName.split(",")[0] + " point of interest", "distance");
+
+		return momentService.finyByLocation(cityName,places);
+
+	}
+
+	@GetMapping("/{accountId}")
+	public List<Moment> getMyMoment(@PathVariable String accountId) {
+		return momentService.findByAccountId(accountId);
+	}
+	//현재 위치에서 가까운 모먼트
+
+	//시간순으로 정렬 가능한가
+	@GetMapping("/{placeId}")
+	public List<Moment> getMomentOfPlace(@PathVariable Integer placeId){
+		List<Moment> moments = momentService.findByPlaceIdOrderByCreateDateDesc(placeId);
+		return moments;
+	}
+
 	@GetMapping("/{id}")
 	public Moment getMoment(@PathVariable Integer id) {
 		return momentService.findById(id);
@@ -104,9 +130,4 @@ public class MomentController {
 	public Moment updateMoment(@RequestBody Moment moment) {
 		return moment;
 	}
-
-//	@GetMapping("/test")
-//	public GooglePlaceResponse test() {
-//		return googlePlaceService.requestNearBySearch("51.5054597,-0.0775452", "london point of interest", "distance");
-//	}
 }

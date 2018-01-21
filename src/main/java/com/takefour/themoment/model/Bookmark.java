@@ -12,7 +12,6 @@ public class Bookmark {
 	@Id
 	@GeneratedValue
 	private Integer id;
-
 	private String accountId;
 	private Integer momentId;
 }

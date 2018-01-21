@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface MomentRepository extends JpaRepository<Moment, Integer> {
 	List<Moment> findByAccountId(String accountId);
-	//여러개라서
+
+	List<Moment> findByPlaceIdOrderByCreateDateDesc(Integer placeId);
 }
 
 //<modelname, primary key type>
