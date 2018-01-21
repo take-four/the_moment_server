@@ -86,3 +86,4 @@ buildNumber.properties
 build/
 
 the-moment-379d9-firebase-adminsdk-4zjhj-9f656d5a3c.json
+src/main/resources/config.properties

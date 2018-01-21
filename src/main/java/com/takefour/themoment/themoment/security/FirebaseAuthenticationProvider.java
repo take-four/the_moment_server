@@ -19,7 +19,7 @@ public class FirebaseAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	private FirebaseUserDetailsService firebaseUserDetailsService;
 
-	// TODO: 2018. 1. 14. 나중에 더 좋은 코드로 리팩토링 필요함!! 
+	// TODO: 2018. 1. 14. 나중에 더 좋은 코드로 리팩토링 필요함!!
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		if (!supports(authentication.getClass())) {

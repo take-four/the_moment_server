@@ -2,80 +2,80 @@ package com.takefour.themoment.themoment.controller.api;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.takefour.themoment.themoment.model.City;
 import com.takefour.themoment.themoment.model.Place;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import com.takefour.themoment.themoment.model.dto.CityPlaceDto;
+import com.takefour.themoment.themoment.repository.PlaceRepository;
+import com.takefour.themoment.themoment.service.CityService;
+import com.takefour.themoment.themoment.service.MomentService;
+import com.takefour.themoment.themoment.service.PlaceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import com.takefour.themoment.themoment.config.method.annotation.CurrentUser;
 import com.takefour.themoment.themoment.model.Moment;
 import com.takefour.themoment.themoment.model.User;
+import com.takefour.themoment.themoment.service.GooglePlaceService;
+import com.takefour.themoment.themoment.service.response.GooglePlaceResponse;
 
 @RestController
 @RequestMapping("/apis/moments")
 public class MomentController {
+
+	@Autowired
+	private MomentService momentService;
+
+	@Autowired
+	private CityService cityService;
+
+	@Autowired
+	private GooglePlaceService googlePlaceService;
+
+	@Autowired
+	private PlaceService placeService;
 	// TODO: 2018. 1. 5. mock 데이터 내려주기 
 
+	@GetMapping("/places")
+	public CityPlaceDto getNearbyPlaces(
+	                                   @RequestParam Double latitude,
+	                                   @RequestParam Double longitude,
+	                                   @CurrentUser User user) {
+		String location = latitude + "," + longitude;
+		String city = googlePlaceService.requestGeocode(location, "locality", "en");
+		List<String> places = googlePlaceService.requestNearBySearch(location, city.split(",")[0] + " point of interest", "distance");
+		return new CityPlaceDto(city, places);
+	}
+
+
 	@PostMapping
-	public Moment saveMoment(@RequestBody Moment moment, @CurrentUser User user) {
-		return new Moment();
+	public Moment saveMoment(@RequestBody Moment moment,
+	                         @RequestParam String cityName,
+	                         @RequestParam String placeName,
+	                         @CurrentUser User user) {
+		return momentService.save(moment, cityName, placeName, user);
 	}
 
 	@GetMapping
 	public List<Moment> getAllMoments(@RequestParam(required = false) Integer userId,
-									  @RequestParam(required = false) Long latitude,
-									  @RequestParam(required = false) Long longitude) {
+									  @RequestParam(required = false) Double latitude,
+									  @RequestParam(required = false) Double longitude) {
 		List<Moment> moments = new ArrayList<>();
-
-		Moment moment = new Moment();
-		moment.setId(1);
-		moment.setDescription("test1");
-		City city = new City();
-		moment.setCity(city);
-		Place place = new Place();
-		moment.setPlace(place);
-		moment.setCreateDate(LocalDateTime.now());
-
-
-		User user = new User();
-		user.setEmail("byeol3058@gmail.com");
-		moment.setUser(user);
-
-		moments.add(moment);
-		moments.add(moment);
-		moments.add(moment);
-
 		return moments;
 	}
 
 	@GetMapping("/{id}")
-	public Moment getMoment() {
-		Moment moment = new Moment();
-		moment.setId(1);
-		moment.setDescription("test1");
-		City city = new City();
-		moment.setCity(city);
-		Place place = new Place();
-		moment.setPlace(place);
-		moment.setCreateDate(LocalDateTime.now());
-
-
-		User user = new User();
-		user.setEmail("byeol3058@gmail.com");
-		moment.setUser(user);
-		return moment;
+	public Moment getMoment(@PathVariable Integer id) {
+		return momentService.findById(id);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteMoment() {
+	public void deleteMoment(@PathVariable Integer id) {
+		momentService.delete(id);
 	}
 
 	@PatchMapping("/{id}")
@@ -83,4 +83,8 @@ public class MomentController {
 		return moment;
 	}
 
+//	@GetMapping("/test")
+//	public GooglePlaceResponse test() {
+//		return googlePlaceService.requestNearBySearch("51.5054597,-0.0775452", "london point of interest", "distance");
+//	}
 }
