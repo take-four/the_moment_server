@@ -9,19 +9,24 @@ import org.springframework.util.MultiValueMap;
 /**
  * Created by hanbyeol on 2018. 1. 12..
  */
-@Component
-@PropertySource("classpath:config.properties")
 public class GooglePlaceQueryParameter {
 
-	@Value("${google-api-key}")
-	private String GOOGLE_API_KEY;
-
-	public MultiValueMap<String, String> nearBySearch(String location, String keyword, String rankby) {
+	public static MultiValueMap<String, String> nearBySearch(String location, String keyword, String rankby, String key) {
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("location", location);
 		parameters.add("keyword", keyword);
 		parameters.add("rankby", rankby);
-		parameters.add("key", GOOGLE_API_KEY);
+		parameters.add("key", key);
 		return parameters;
 	}
-}
+
+	public static MultiValueMap<String, String> geocode(String latlng, String result_type, String language, String key) {
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("latlng", latlng);
+		parameters.add("result_type", result_type);
+		parameters.add("language", language);
+		parameters.add("key", key);
+		return parameters;
+	}
+
+	}

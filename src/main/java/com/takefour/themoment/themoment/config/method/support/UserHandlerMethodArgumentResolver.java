@@ -23,7 +23,11 @@ public class UserHandlerMethodArgumentResolver implements HandlerMethodArgumentR
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 								  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		return getCurrentUser();
+		User user = new User();
+		user.setId(1);
+		user.setEmail("byeol3058@gmail.com");
+		return user;
+//		return getCurrentUser();
 	}
 
 	private User getCurrentUser() {

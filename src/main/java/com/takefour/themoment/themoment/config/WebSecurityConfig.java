@@ -1,7 +1,8 @@
 package com.takefour.themoment.themoment.config;
 
-import java.util.Collections;
-
+import com.takefour.themoment.themoment.security.FirebaseAuthenticationProvider;
+import com.takefour.themoment.themoment.security.FirebaseFilter;
+import com.takefour.themoment.themoment.security.FirebaseUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,17 +13,14 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.takefour.themoment.themoment.security.FirebaseAuthenticationProvider;
-import com.takefour.themoment.themoment.security.FirebaseFilter;
-import com.takefour.themoment.themoment.security.FirebaseUserDetailsService;
+import java.util.Collections;
 
 /**
  * Created by hanbyeol on 2018. 1. 11..
  */
-@Configuration
-@EnableWebSecurity(debug = true)
+//@Configuration
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired

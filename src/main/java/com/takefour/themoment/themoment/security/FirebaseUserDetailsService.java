@@ -20,17 +20,19 @@ public class FirebaseUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		User user = userRepository.findByEmail(userName);
-		if (user == null) {
-			return null;
-		}
-		return user;
+//		User user = userRepository.findByEmail(userName);
+//		if (user == null) {
+//			return null;
+//		}
+//		return user;
+		return null;
 	}
 
 	public UserDetails save(String email, String name) {
-		User user = new User();
-		user.setEmail(email);
-		user.setName(name);
-		return userRepository.save(user);
+//		User user = new User();
+//		user.setEmail(email);
+//		user.setName(name);
+//		return userRepository.save(user);
+		return null;
 	}
 }

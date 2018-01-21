@@ -28,7 +28,7 @@ public class FirebaseFilter extends OncePerRequestFilter {
 
 		String idToken = request.getHeader(AUTH_HEADER_NAME);
 
-		if(!idToken.isEmpty()) {
+		if(idToken != null) {
 			// BadCredentialsException
 			Task<FirebaseToken> task = FirebaseAuth.getInstance().verifyIdToken(idToken);
 			try {

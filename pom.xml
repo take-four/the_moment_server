@@ -114,6 +114,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
+>>>>>>> #34 Add service for google place api
 		</dependency>
 
 	</dependencies>

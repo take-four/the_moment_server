@@ -1,5 +1,6 @@
 package com.takefour.themoment.themoment.service;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class GoogleServiceTest {
 	private GooglePlaceService googlePlaceService;
 
 	@Test
+	@Ignore
 	public void nearBySearchTest() {
-		GooglePlaceResponse response = googlePlaceService.requestNearBySearch("51.5054597,-0.0775452", "london point of interest", "distance");
-		System.out.println(response);
+		googlePlaceService.requestNearBySearch("51.5054597,-0.0775452", "london point of interest", "distance");
 	}
 }

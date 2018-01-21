@@ -3,6 +3,7 @@ package com.takefour.themoment.themoment;
 import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;

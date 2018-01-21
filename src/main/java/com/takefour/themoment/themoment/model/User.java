@@ -20,7 +20,7 @@ import lombok.Data;
 //실행될때 이걸보고 테이블을 만들어준다.
 @Entity
 @Data
-public class User implements UserDetails {
+public class User {
 	@Id // primary key
 	@GeneratedValue //auto increment
 	private Integer id;
@@ -36,40 +36,40 @@ public class User implements UserDetails {
 
 	private String role;
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return AuthorityUtils.createAuthorityList(role, "USER");
-	}
-
-	@Override
-	public String getPassword() {
-		return null;
-	}
-
-	// getUserName 이랑 구분되어야 함
-	@Override
-	public String getUsername() {
-		return email;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+//	@Override
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		return AuthorityUtils.createAuthorityList(role, "USER");
+//	}
+//
+//	@Override
+//	public String getPassword() {
+//		return null;
+//	}
+//
+//	// getUserName 이랑 구분되어야 함
+//	@Override
+//	public String getUsername() {
+//		return email;
+//	}
+//
+//	@Override
+//	public boolean isAccountNonExpired() {
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean isAccountNonLocked() {
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean isCredentialsNonExpired() {
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean isEnabled() {
+//		return true;
+//	}
 
 }
