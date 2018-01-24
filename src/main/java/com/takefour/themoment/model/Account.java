@@ -23,7 +23,7 @@ public class Account {
 
 	@ElementCollection
 	@CollectionTable(name = "visited")
-	private List<Integer> cityId = new ArrayList<>();
+	private List<Integer> visitedList = new ArrayList<>();
 
 	private String role;
 }

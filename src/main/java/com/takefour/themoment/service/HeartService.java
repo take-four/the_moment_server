@@ -23,4 +23,8 @@ public class HeartService {
 	public void deleteByAccountIdAndMomentId(String accountId, Integer momentId) {
 		heartRepository.deleteByAccountIdAndMomentId(accountId, momentId);
 	}
+
+	public Heart findByAccountIdAndMomentId(String accountId, Integer momentId){
+		return heartRepository.findByAccountIdAndMomentId(accountId, momentId);
+	}
 }
