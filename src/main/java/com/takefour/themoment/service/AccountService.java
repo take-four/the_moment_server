@@ -1,6 +1,7 @@
 package com.takefour.themoment.service;
 
 import com.takefour.themoment.model.Account;
+import com.takefour.themoment.model.City;
 import com.takefour.themoment.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,11 @@ public class AccountService {
 
 	public void delete(String id) {
 		accountRepository.delete(id);
+	}
+
+	public Account updateVisited(String id, City city){
+		Account updated = accountRepository.findOne(id);
+		updated.getVisitedList().add(city.getId());
+		return updated;
 	}
 }

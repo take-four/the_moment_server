@@ -38,6 +38,7 @@ public class TheMomentApplicationTests {
 	@Test
 	public void userTest() {
 		Account account = new Account();
+		account.setId("test");
 		account.setEmail("byeol3058@gmail.com");
 		account.setName("hanbyeol");
 

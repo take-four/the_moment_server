@@ -62,6 +62,7 @@ public class GooglePlaceService {
 		return results;
 	}
 
+
 	public String requestGeocode(String location, String result_type, String language) {
 		URI url = generateUrl(GEOCODE_URL, GooglePlaceQueryParameter.geocode(location, result_type, language, GOOGLE_API_KEY));
 		GoogleGeocodeResponse response = restTemplate.getForEntity(url, GoogleGeocodeResponse.class).getBody();
