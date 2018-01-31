@@ -74,8 +74,8 @@ public class MomentController {
 	}
 
 	@GetMapping("/{accountId}")
-	public List<Moment> getMyMoment(@CurrentUser User user) {
-		return momentService.findByAccountId(user.getUsername());
+	public List<Moment> getMyMoment(@PathVariable String accountId) {
+		return momentService.findByAccountId(accountId);
 	}
 	//현재 위치에서 가까운 모먼트
 
@@ -135,8 +135,9 @@ public class MomentController {
 	}
 
 	@PostMapping("/{momentId}/bookmarks")
-	public void bookmarkMoment(@CurrentUser User user,
-	                           @PathVariable Integer momentId) {
+	public void bookmarkMoment(@PathVariable Integer momentId,
+	                           @CurrentUser User user
+	                           ) {
 		bookmarkService.save(user.getUsername(), momentId);
 	}
 
