@@ -33,6 +33,9 @@ public class MomentController {
 	@Autowired
 	private CityService cityService;
 
+	@Autowired
+	private BookmarkService bookmarkService;
+
 	@GetMapping("/places")
 	public CityPlaceDto getNearbyPlaces(@RequestParam Double latitude,
 	                                    @RequestParam Double longitude,
@@ -70,9 +73,9 @@ public class MomentController {
 		return moments;
 	}
 
-	@GetMapping("/mymoments")
-	public List<Moment> getMyMoment(@CurrentUser User user) {
-		return momentService.findByAccountId(user.getUsername());
+	@GetMapping("/{accountId}")
+	public List<Moment> getMyMoment(@PathVariable String accountId) {
+		return momentService.findByAccountId(accountId);
 	}
 	//현재 위치에서 가까운 모먼트
 
@@ -130,4 +133,24 @@ public class MomentController {
 			return true;
 		}
 	}
+
+	@PostMapping("/{momentId}/bookmarks")
+	public void bookmarkMoment(@PathVariable Integer momentId,
+	                           @CurrentUser User user
+	                           ) {
+		bookmarkService.save(user.getUsername(), momentId);
+	}
+
+	@GetMapping("/bookmarks")
+	public List<Moment> getBookmarkedMoments(@CurrentUser User user){
+		List<Moment> moments = bookmarkService.findMomentsByAccountId(user.getUsername());
+		return moments;
+	}
+
+	@DeleteMapping("/{momentId}/bookmarks")
+	public void deleteBookmarkedMoment(@PathVariable Integer momentId,
+	                                   @CurrentUser User user){
+		bookmarkService.deleteByAccountIdAndMomentId(user.getUsername(), momentId);
+	}
+
 }
