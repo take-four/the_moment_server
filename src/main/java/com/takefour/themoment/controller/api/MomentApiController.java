@@ -3,7 +3,6 @@ package com.takefour.themoment.controller.api;
 import com.takefour.themoment.config.method.annotation.CurrentUser;
 import com.takefour.themoment.model.Account;
 import com.takefour.themoment.model.City;
-import com.takefour.themoment.model.Heart;
 import com.takefour.themoment.model.Moment;
 import com.takefour.themoment.model.dto.CityPlaceDto;
 import com.takefour.themoment.service.*;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/apis/moments")
-public class MomentController {
+public class MomentApiController {
 
 	@Autowired
 	private MomentService momentService;
@@ -70,7 +69,7 @@ public class MomentController {
 		return moments;
 	}
 
-	@GetMapping("/mymoments")
+	@GetMapping("/{accountId}")
 	public List<Moment> getMyMoment(@CurrentUser User user) {
 		return momentService.findByAccountId(user.getUsername());
 	}

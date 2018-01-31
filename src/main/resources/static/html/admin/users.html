@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>the moment user list</title>
+    <link rel="stylesheet" href="../../css/minimal-table.css">
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+<h1>User list</h1>
+
+
+<table id="personDataTable">
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Visited City</th>
+    </tr>
+
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/apis/users',
+            method: 'GET'
+        }).done(function (data) {
+            console.log(data);
+            drawTable(data);
+        })
+
+    });
+
+
+    function drawTable(data) {
+        for (var i = 0; i < data.length; i++) {
+            drawRow(data[i]);
+        }
+    }
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        $("#personDataTable").append(row);
+        row.append($("<td>" + rowData.id + "</td>"));
+        row.append($("<td>" + rowData.email + "</td>"));
+        row.append($("<td>" + rowData.name + "</td>"));
+    }
+    console.log('hi');
+</script>
+
+
+<input type="button" id="hw" value="Hello world" />
+<script type="text/javascript">
+    var hw = document.getElementById('hw');
+    hw.addEventListener('click', function(){
+        alert('Hello world');
+    })
+</script>
+
+
+</body>
+
+</html>
