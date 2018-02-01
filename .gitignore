@@ -91,3 +91,8 @@ src/main/resources/config.properties
 .DS_Store
 src/.DS_Store
 src/main/.DS_Store
+
+src/main/frontend/node_modules
+src/main/frontend/npm-debug.log*
+src/main/frontend/yarn-debug.log*
+src/main/frontend/yarn-error.log*

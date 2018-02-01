@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.addFilterBefore(tokenAuthorizationFilter(), BasicAuthenticationFilter.class)
 				.authorizeRequests()
-				.antMatchers("/swagger-ui.html").permitAll()
+				.antMatchers("/swagger-ui.html", "/**").permitAll()
 				.anyRequest()
 //				.fullyAuthenticated()
 //				.antMatchers(HttpMethod.GET, "/apis/**")
